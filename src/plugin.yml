@@ -1,0 +1,10 @@
+name: PGF-Teleport
+version: 3.0.0
+api-version: 1.18
+authors: [bk, CrimsonDart]
+website: play.pgfmc.net
+main: net.pgfmc.teleport.Main
+description: Teleport functionality for PGF
+depend: [PGF-Core, PGF-Survival]
+load: POSTWORLD
+prefix: PGF-Teleport
