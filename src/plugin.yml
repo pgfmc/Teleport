@@ -47,3 +47,19 @@ commands:
     description: Cancel a teleport request
     usage: /<command> [player]
     permission: pgf.cmd.tp.tpcancel
+  warp:
+    description: Warp to a location
+    usage: /<command> [name]
+    permission: pgf.cmd.warp.warp
+  warps:
+    description: List all warps
+    usage: /<command>
+    permission: pgf.cmd.warp.warps
+  setwarp:
+    description: Set a new warp
+    usage: /<command> [name]
+    permission: pgf.cmd.warp.set
+  delwarp:
+    description: Delete a warp
+    usage: /<command> [name]
+    permission: pgf.cmd.warp.del

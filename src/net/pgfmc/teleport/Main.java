@@ -11,6 +11,10 @@ import net.pgfmc.teleport.tpa.Tpa;
 import net.pgfmc.teleport.tpa.Tpaccept;
 import net.pgfmc.teleport.tpa.Tpcancel;
 import net.pgfmc.teleport.tpa.Tpdeny;
+import net.pgfmc.teleport.warp.DelWarp;
+import net.pgfmc.teleport.warp.SetWarp;
+import net.pgfmc.teleport.warp.Warp;
+import net.pgfmc.teleport.warp.Warps;
 
 public class Main extends JavaPlugin {
 	
@@ -30,6 +34,11 @@ public class Main extends JavaPlugin {
 		getCommand("sethome").setExecutor(new SetHome());
 		getCommand("delhome").setExecutor(new DelHome());
 		getCommand("homes").setExecutor(new Homes());
+		
+		getCommand("warp").setExecutor(new Warp());
+		getCommand("warps").setExecutor(new Warps());
+		getCommand("setwarp").setExecutor(new SetWarp());
+		getCommand("delwarp").setExecutor(new DelWarp());
 		
 		getCommand("back").setExecutor(new Back());
 		
