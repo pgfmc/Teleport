@@ -58,7 +58,7 @@ public class Warps implements CommandExecutor {
 		
 		for (Map<?, ?> warp : warps)
 		{
-			warpNames.add(String.join(", ", (CharSequence[]) warp.keySet().toArray()));
+			warpNames.add(warp.keySet().toArray()[0].toString());
 		}
 		
 		return warpNames;
