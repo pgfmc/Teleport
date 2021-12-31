@@ -20,8 +20,8 @@ public class TpRequest extends Requester {
 			{
 				if (!(a.isOnline() && b.isOnline())) { return false; }
 				
-				a.sendMessage("§6Teleporting to " + b.getRankedName() + " §r§6in 5 seconds");
-				b.sendMessage("§6Teleporting "+ a.getRankedName() +" §r§6here in 5 seconds");
+				a.sendMessage("§6Teleporting to " + b.getNickname() + " §r§6in 5 seconds");
+				b.sendMessage("§6Teleporting "+ a.getNickname() +" §r§6here in 5 seconds");
 				
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() { @Override public void run() {
 					SpawnProtection.TEMP_PROTECT(a.getPlayer(), 40);
@@ -38,8 +38,8 @@ public class TpRequest extends Requester {
 			{
 				if (!(a.isOnline() && b.isOnline())) { return false; }
 				
-				b.sendMessage("§6Teleporting to " + a.getRankedName() + " §r§ain 5 seconds");
-				a.sendMessage("§6Teleporting "+ b.getRankedName() +" §r§6here in 5 seconds");
+				b.sendMessage("§6Teleporting to " + a.getNickname() + " §r§ain 5 seconds");
+				a.sendMessage("§6Teleporting "+ b.getNickname() +" §r§6here in 5 seconds");
 				
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() { @Override public void run() {
 					
