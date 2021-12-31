@@ -46,17 +46,5 @@ public class Homes implements CommandExecutor {
 		return Arrays.asList(getHomes(p).keySet().toArray());
 	}
 	
-	
-	/*
-	 * is only ran once
-	 * Will attempt to get homes of a player
-	 * empty HashMap if no homes??????????????
-	 */
-	@Deprecated
-	public void init() {
-		
-		
-	}
-	
 
 }
