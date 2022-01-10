@@ -26,10 +26,14 @@ public class Tpa implements CommandExecutor {
 			return false;
 		}
 		
+		System.out.print("Hi");
 		Player b = Bukkit.getPlayer(args[0]);
 		if (b == null)
 		{
 			a.sendMessage("§cCould not find player §6§n" + args[0] + "§r§c.");
+			return true;
+		} else if (b == a) {
+			a.sendMessage("§cYou cannot teleport to yourself.");
 			return true;
 		}
 		
