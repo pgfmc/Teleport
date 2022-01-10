@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.pgfmc.core.cmd.Goto;
+import net.pgfmc.survival.cmd.Afk;
 import net.pgfmc.survival.dim.SpawnProtection;
 import net.pgfmc.teleport.Main;
 
@@ -52,6 +53,8 @@ public class Warp implements CommandExecutor {
 			Goto.logBackLocation(p, p.getLocation());
 			p.teleport((Location) warp.get(name));
 			p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
+			
+			if (Afk.isAfk(p)) { Afk.toggleAfk(p); }
 			}
 		}, 20 * 5);
 		

@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import net.pgfmc.core.cmd.Goto;
+import net.pgfmc.survival.cmd.Afk;
 import net.pgfmc.survival.dim.SpawnProtection;
 import net.pgfmc.teleport.Main;
 
@@ -48,6 +49,8 @@ public class Back implements CommandExecutor, Listener {
 				SpawnProtection.TEMP_PROTECT(p, 20 * 2);
 				p.teleport(dest); // may be wrong I will test
 				p.sendMessage("§aPoof!");
+				
+				if (Afk.isAfk(p)) { Afk.toggleAfk(p); }
 			}
 			
 		}, 20 * 5);
