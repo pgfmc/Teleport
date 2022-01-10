@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import net.pgfmc.core.cmd.Goto;
 import net.pgfmc.survival.Main;
+import net.pgfmc.survival.cmd.Afk;
 import net.pgfmc.survival.dim.SpawnProtection;
 
 public class Home implements CommandExecutor {
@@ -44,6 +45,8 @@ public class Home implements CommandExecutor {
 				Goto.logBackLocation(p, p.getLocation()); // Log back location
 				p.teleport(toHome);
 				p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 0);
+				
+				if (Afk.isAfk(p)) { Afk.toggleAfk(p); }
 				}
 			}, 20 * 5);
 		} else

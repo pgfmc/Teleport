@@ -6,6 +6,7 @@ import org.bukkit.Sound;
 import net.pgfmc.core.cmd.Goto;
 import net.pgfmc.core.requestAPI.Requester;
 import net.pgfmc.survival.Main;
+import net.pgfmc.survival.cmd.Afk;
 import net.pgfmc.survival.dim.SpawnProtection;
 
 public class TpRequest extends Requester {
@@ -28,6 +29,8 @@ public class TpRequest extends Requester {
 					Goto.logBackLocation(a.getPlayer(), a.getPlayer().getLocation());
 					a.teleport(b);
 					a.playSound(Sound.ENTITY_ENDERMAN_TELEPORT);
+					
+					if (Afk.isAfk(a.getPlayer())) { Afk.toggleAfk(a.getPlayer()); }
 					}
 				}, 20 * 5);
 				
