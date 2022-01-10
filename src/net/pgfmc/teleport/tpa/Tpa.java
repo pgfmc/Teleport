@@ -34,6 +34,7 @@ public class Tpa implements CommandExecutor {
 			return true;
 		} else if (b == a) {
 			a.sendMessage("§cYou cannot teleport to yourself.");
+			return true;
 		}
 		
 		TpRequest.TPA.createRequest(a, b);
