@@ -1,7 +1,7 @@
 package net.pgfmc.teleport.back;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,9 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import net.pgfmc.core.cmd.Goto;
+import net.pgfmc.core.teleportAPI.TimedTeleport;
 import net.pgfmc.survival.cmd.Afk;
-import net.pgfmc.survival.dim.SpawnProtection;
-import net.pgfmc.teleport.Main;
 
 /**
  * Command to teleport the player to their last death location.
@@ -40,20 +39,11 @@ public class Back implements CommandExecutor, Listener {
 		
 		p.sendMessage("§6You will be teleported in 5 seconds.");
 		
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
-			
-			@Override
-			public void run()
-			{
-				Goto.logBackLocation(p, null);
-				SpawnProtection.TEMP_PROTECT(p, 20 * 2);
-				p.teleport(dest); // may be wrong I will test
-				p.sendMessage("§aPoof!");
-				
-				if (Afk.isAfk(p)) { Afk.toggleAfk(p); }
-			}
-			
-		}, 20 * 5);
+		new TimedTeleport(p, dest, 5, 40, true).setAct(v -> {
+			p.sendMessage("§aPoof!");
+			p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 0);
+			if (Afk.isAfk(p)) { Afk.toggleAfk(p); }
+		});
 		
 		
 		return true;

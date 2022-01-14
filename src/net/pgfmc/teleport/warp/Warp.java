@@ -2,7 +2,6 @@ package net.pgfmc.teleport.warp;
 
 import java.util.Map;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -10,10 +9,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.pgfmc.core.cmd.Goto;
+import net.pgfmc.core.teleportAPI.TimedTeleport;
 import net.pgfmc.survival.cmd.Afk;
-import net.pgfmc.survival.dim.SpawnProtection;
-import net.pgfmc.teleport.Main;
 
 public class Warp implements CommandExecutor {
 
@@ -44,19 +41,13 @@ public class Warp implements CommandExecutor {
 			return true;
 		}
 		
-		
-		
 		sender.sendMessage("§aWarping to §6" + name + " §ain 5 seconds!");
 		
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() { @Override public void run() {
-			SpawnProtection.TEMP_PROTECT(p, 40);
-			Goto.logBackLocation(p, p.getLocation());
-			p.teleport((Location) warp.get(name));
+		new TimedTeleport(p, (Location) warp.get(name), 5, 40, true).setAct(v -> {
+			p.sendMessage("§aPoof!");
 			p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
-			
 			if (Afk.isAfk(p)) { Afk.toggleAfk(p); }
-			}
-		}, 20 * 5);
+		});
 		
 		
 		
