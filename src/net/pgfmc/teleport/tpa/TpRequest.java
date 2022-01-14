@@ -1,13 +1,10 @@
 package net.pgfmc.teleport.tpa;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 
-import net.pgfmc.core.cmd.Goto;
 import net.pgfmc.core.requestAPI.Requester;
-import net.pgfmc.survival.Main;
+import net.pgfmc.core.teleportAPI.TimedTeleport;
 import net.pgfmc.survival.cmd.Afk;
-import net.pgfmc.survival.dim.SpawnProtection;
 
 public class TpRequest extends Requester {
 	
@@ -24,15 +21,11 @@ public class TpRequest extends Requester {
 				a.sendMessage("§6Teleporting to " + b.getRankedName() + " §r§6in 5 seconds");
 				b.sendMessage("§6Teleporting "+ a.getRankedName() +" §r§6here in 5 seconds");
 				
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() { @Override public void run() {
-					SpawnProtection.TEMP_PROTECT(a.getPlayer(), 40);
-					Goto.logBackLocation(a.getPlayer(), a.getPlayer().getLocation());
-					a.teleport(b);
+				new TimedTeleport(a.getPlayer(), b.getPlayer(), 5, 40, true).setAct(v -> {
+					a.sendMessage("§aPoof!");
 					a.playSound(Sound.ENTITY_ENDERMAN_TELEPORT);
-					
 					if (Afk.isAfk(a.getPlayer())) { Afk.toggleAfk(a.getPlayer()); }
-					}
-				}, 20 * 5);
+				});
 				
 				return true;
 			}
@@ -44,16 +37,11 @@ public class TpRequest extends Requester {
 				b.sendMessage("§6Teleporting to " + a.getRankedName() + " §r§ain 5 seconds");
 				a.sendMessage("§6Teleporting "+ b.getRankedName() +" §r§6here in 5 seconds");
 				
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() { @Override public void run() {
-					
-					SpawnProtection.TEMP_PROTECT(a.getPlayer(), 40);
-					
-					//a.	tempProtect(20 * 2);
-					Goto.logBackLocation(b.getPlayer(), b.getPlayer().getLocation());
-					b.teleport(a);
-					a.playSound(Sound.ENTITY_ENDERMAN_TELEPORT);
-					}
-				}, 20 * 5);
+				new TimedTeleport(b.getPlayer(), a.getPlayer(), 5, 40, true).setAct(v -> {
+					b.sendMessage("§aPoof!");
+					b.playSound(Sound.ENTITY_ENDERMAN_TELEPORT);
+					if (Afk.isAfk(b.getPlayer())) { Afk.toggleAfk(b.getPlayer()); }
+				});
 				
 				return true;
 			}
